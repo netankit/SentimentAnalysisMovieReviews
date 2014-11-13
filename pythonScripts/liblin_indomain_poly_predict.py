@@ -31,15 +31,17 @@ with open('/mounts/Users/student/ankit/downloads/sentiment/resources/st.tsv') as
         testdataset.append(component_test[2].rstrip('\n'))
 
 # InputData FitTransform and Normalized
-with open('/mounts/Users/student/ankit/downloads/indomainDataset/glove_dataset_train_skip.txt', 'rb') as infile:
+with open('/mounts/Users/student/ankit/downloads/indomainDataset/poly_dataset_train_skip.txt', 'rb') as infile:
    InputData_raw = pickle.load(infile)
 InputData = preprocessing.normalize(InputData_raw,norm='l2')
 
 
 # TestData FitTransform and Normalized
-with open('/mounts/Users/student/ankit/downloads/indomainDataset/glove_dataset_test_skip.txt', 'rb') as stfile:
+with open('/mounts/Users/student/ankit/downloads/indomainDataset/poly_dataset_test_skip.txt', 'rb') as stfile:
    TestData_raw = pickle.load(stfile)
 TestData = preprocessing.normalize(TestData_raw,norm='l2')
+
+
 
 #InputData_fit_transform = vectorizer.fit_transform(corpus)
 # TestData Fit Transform and Normalized
@@ -60,7 +62,7 @@ out = clf.predict(TestData)
 sentiment = out.tolist()
 
 #Final Output file written to disk
-file = open("/mounts/Users/student/ankit/downloads/sentiment/result/output_liblin_glove_indomain_norm.txt", "w")
+file = open("/mounts/Users/student/ankit/downloads/sentiment/result/output_liblin_poly_indomain.txt", "w")
 file.write('PhraseId,Sentiment\n')        
 for i,j in zip(phraseid , sentiment):
     val = '{0},{1}\n'.format(i, j)
